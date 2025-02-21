@@ -6,7 +6,7 @@ export default function Header() {
     <h1>Code Journal</h1>
     <nav>
       <ul>
-        <li><Link to="/entries" className="text-white">Entries</Link></li>
+        <li><Link to="/" className="text-white">Entries</Link></li>
       </ul>
     </nav>
     <Outlet />

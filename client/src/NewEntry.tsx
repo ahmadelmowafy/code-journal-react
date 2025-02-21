@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { addEntry } from "./data";
+import type { UnsavedEntry } from "./data";
 
 export function NewEntry() {
   const [title, setTitle] = useState('');
@@ -8,13 +9,17 @@ export function NewEntry() {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    const newEntry = {title, photoUrl, notes};
+    addEntry(newEntry)
   }
+
+
 
   return (
     <div>
       <h2>New Entry</h2>
       <img src={photoUrl || '/images/placeholder-image-square.jpg'} />
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Title
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
@@ -24,6 +29,7 @@ export function NewEntry() {
         <label>Notes
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)}/>
         </label>
+        <button>Save</button>
       </form>
     </div>
   );
