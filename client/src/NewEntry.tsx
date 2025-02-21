@@ -1,16 +1,50 @@
-import { useState, FormEvent } from "react";
-import { addEntry } from "./data";
-import type { UnsavedEntry } from "./data";
+import { useState, FormEvent, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { addEntry, readEntry } from "./data";
+// import type { UnsavedEntry } from "./data";
 
 export function NewEntry() {
   const [title, setTitle] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const [notes, setNotes] = useState('');
+  const navigate = useNavigate();
+  const [error, setError] = useState<unknown>();
+  const [isLoading, setIsLoading] = useState();
+  const {entryId} = useParams();
+
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const newEntry = {title, photoUrl, notes};
     addEntry(newEntry)
+    navigate('/');
+  }
+
+  useEffect(() => {
+    async function loadEntry() {
+      try {
+        const entry = await readEntry(entryId)
+        console.log(entry);
+        // setEntries(entry);
+      } catch (error) {
+        setError(error)
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadEntry();
+  }, [])
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error! {error instanceof Error ? error.message : 'Unknown Error'}
+      </div>
+    );
   }
 
 
