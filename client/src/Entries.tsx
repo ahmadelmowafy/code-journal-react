@@ -4,7 +4,7 @@ export default function Entries() {
   return (
     <div>
       <h1>Entries</h1>
-      <Link to="details/new"></Link>
+      <Link to="details/new">New</Link>
     </div>
   )
 }

@@ -1,11 +1,20 @@
 // import { useState } from 'react'
-// import './App.css'
-// import Entries from './Entries'
+import './App.css'
+import { Route, Routes } from 'react-router-dom'
+
+import Entries from "./Entries"
+import Header from "./Header"
+import { NewEntry } from './NewEntry'
 
 function App() {
   return (
     <>
-      <h1>Code Journal</h1>
+    <Routes>
+     <Route path='/' element={<Header />}>
+      <Route index element={<Entries/>}/>
+      <Route path='details/new' element={<NewEntry />} />
+     </Route>
+      </Routes>
     </>
   )
 }
