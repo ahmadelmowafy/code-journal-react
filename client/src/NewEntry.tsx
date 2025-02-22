@@ -66,20 +66,35 @@ export function NewEntry() {
 
   return (
     <div>
-      <h2>New Entry</h2>
+      <h2 className="m-4">New Entry</h2>
+      <form className="flex flex-wrap text-left" onSubmit={handleSubmit}>
+        <div className="w-1/2">
       <img src={photoUrl || '/images/placeholder-image-square.jpg'} />
-      <form onSubmit={handleSubmit}>
+      </div>
+      <div className="w-1/2">
         <label>Title
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <br/>
+          <input className="w-full" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
-        <label>Photo URL
-          <input type="text" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
+        <br/>
+        <br/>
+        <label >Photo URL
+          <br/>
+          <input className="w-full" type="text" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
         </label>
-        <label>Notes
-          <textarea value={notes} onChange={(e) => setNotes(e.target.value)}/>
+        </div>
+        <div className="w-full flex">
+        <label className="w-full">Notes
+          <br/>
+          <textarea className="w-full" value={notes} onChange={(e) => setNotes(e.target.value)}/>
         </label>
+        </div>
+        <br/>
+        <div className="flex flex-wrap justify-between w-full mt-3">
         {isEditing && (<button onClick={handleDelete}>Delete</button>)}
-        <button>Save</button>
+
+        <button >Save</button>
+        </div>
       </form>
     </div>
   );

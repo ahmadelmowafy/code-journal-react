@@ -36,10 +36,12 @@ export default function Entries() {
 
   return (
     <div>
+      <div className="flex items-center p-3 justify-between">
       <h1>Entries</h1>
-      <Link to="details/new">New</Link>
+      <Link to="details/new" className="">New</Link>
+      </div>
       {entries.length ?
-      <ul>
+      <ul >
         {entries.map(entry => (<EntryCard entry={entry} key={entry.entryId}/>))}
       </ul> : <p>No entries have been recorded</p>}
     </div>
@@ -52,13 +54,19 @@ type Props = {
 }
 function EntryCard({ entry }: Props) {
   return (
-  <li>
+  <li className="flex flex-wrap p-3">
+    <div className="w-1/2 ">
+    <img className="" src={entry.photoUrl} alt={entry.title} />
+    </div>
+    <div className="w-1/2 text-left">
+    <div className="flex justify-between">
     <h2>{entry.title}</h2>
     <Link to={`/details/${entry.entryId}`}>
     Edit
     </Link>
-    <img src={entry.photoUrl} alt={entry.title} />
-    <p>{entry.notes}</p>
+    </div>
+    <p className="pt-3">{entry.notes}</p>
+    </div>
   </li>
   );
 }
