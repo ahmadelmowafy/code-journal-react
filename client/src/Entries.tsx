@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { readEntries, type Entry } from "./data"
-import { NewEntry } from "./NewEntry";
-
 
 export default function Entries() {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -40,9 +38,10 @@ export default function Entries() {
     <div>
       <h1>Entries</h1>
       <Link to="details/new">New</Link>
+      {entries.length ?
       <ul>
-        {entries.map(entry => (<EntryCard entry={entry}/>))}
-      </ul>
+        {entries.map(entry => (<EntryCard entry={entry} key={entry.entryId}/>))}
+      </ul> : <p>No entries have been recorded</p>}
     </div>
 
   )
@@ -53,7 +52,7 @@ type Props = {
 }
 function EntryCard({ entry }: Props) {
   return (
-  <li key={entry.entryId}>
+  <li>
     <h2>{entry.title}</h2>
     <Link to={`/details/${entry.entryId}`}>
     Edit

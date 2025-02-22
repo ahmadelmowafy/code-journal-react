@@ -42,6 +42,7 @@ export async function readEntry(entryId: number): Promise<Entry | undefined> {
 }
 
 export async function addEntry(entry: UnsavedEntry): Promise<Entry> {
+  console.log('addEntry called')
   const data = readData();
   const newEntry = {
     ...entry,
@@ -53,6 +54,7 @@ export async function addEntry(entry: UnsavedEntry): Promise<Entry> {
 }
 
 export async function updateEntry(entry: Entry): Promise<Entry> {
+  console.log('updateEntry called')
   const data = readData();
   const newEntries = data.entries.map((e) =>
     e.entryId === entry.entryId ? entry : e
